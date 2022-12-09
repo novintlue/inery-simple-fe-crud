@@ -1,8 +1,8 @@
 import React from 'react';
-import ReadForm from './ReadForm';
-import {Rpcs} from './Rpc'
+import DeleteForm from './DeleteForm';
+import {Rpcs} from '../Rpc'
 
-const ReadData = () => {
+const DeleteData = () => {
   const [Message, setMessage] = React.useState("");
   const handleOnSubmit = async (form) => {
     const api = Rpcs()
@@ -13,7 +13,7 @@ const ReadData = () => {
           actions:[
               {
                 account: form.user,
-                name:"dbread",
+                name:"dbdestroy",
                 authorization:[
                       {
                           actor: form.user,
@@ -27,24 +27,20 @@ const ReadData = () => {
           ]
       },{broadcast:true,sign:true})
   
-      console.log(tx) // output the tx to terminal, it's Json Object
-      console.log(tx.processed.action_traces[0].console)
       setMessage(tx.processed.action_traces[0].console)
   }catch(error){
-      console.log(error.toString())
       setMessage(error.toString())
   }
-};
+  };
 
   return (
-    <>
+  <>
     <React.Fragment>
-      <ReadForm handleOnSubmit={handleOnSubmit} />
-    </React.Fragment>
-    <div className="main-form">
-    {Message && <div> {Message} </div>}
-  </div></>
+      <DeleteForm handleOnSubmit={handleOnSubmit} />
+    </React.Fragment><div className="main-form">
+        {Message && <div> {Message} </div>}
+      </div></>
   );
 };
 
-export default ReadData;
+export default DeleteData;

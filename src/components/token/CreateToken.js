@@ -1,8 +1,8 @@
 import React from 'react';
-import DataForm from './AddForm';
-import {Rpcs} from './Rpc'
+import DataForm from './CreateTokenForm';
+import {Rpcs} from '../Rpc'
 
-const AddData = () => {
+const Data = () => {
   const [Message, setMessage] = React.useState("");
   const handleOnSubmit = async (form) => {
     const api = Rpcs()
@@ -13,7 +13,7 @@ const AddData = () => {
           actions:[
               {
                 account: form.user,
-                name:"dbcreate",
+                name:"create",
                 authorization:[
                       {
                           actor: form.user,
@@ -21,7 +21,7 @@ const AddData = () => {
                       }
                   ],
                   data:{
-                      id: form.id, user: form.user, data: form.data
+                      issuer: form.user, maximum_supply: form.supply
                   }
               }
           ]
@@ -32,7 +32,7 @@ const AddData = () => {
       setMessage(tx.processed.action_traces[0].console)
   }catch(error){
       console.log(error)
-      setMessage(error.toSting())
+      setMessage(error.toString())
   }
   };
 
@@ -45,4 +45,4 @@ const AddData = () => {
   );
 };
 
-export default AddData;
+export default Data;

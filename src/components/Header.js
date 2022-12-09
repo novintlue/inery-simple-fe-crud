@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 const Header = () => {
   return (
     <header>
-      <h1>CRUD RPC</h1>
+      <h1>Simple RPC</h1>
       <hr />
       <div className="links">
+        <h3>CRUD</h3>
         <NavLink to="/add" className="link" activeClassName="active">
           Add
         </NavLink>

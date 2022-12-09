@@ -1,4 +1,5 @@
 const webpack = require('webpack'); 
+
 module.exports = function override(config) { 
 		const fallback = config.resolve.fallback || {}; 
 		Object.assign(fallback, { 
@@ -15,8 +16,12 @@ module.exports = function override(config) {
     config.plugins = (config.plugins || []).concat([ 
         new webpack.ProvidePlugin({ 
          process: 'process/browser', 
-       Buffer: ['buffer', 'Buffer'] 
-     }) 
+       Buffer: ['buffer', 'Buffer']
+     }),
+     new webpack.DefinePlugin({
+      'process.env.PRIVATE_KEY': JSON.stringify(process.env.PRIVATE_KEY.toString()),
+      'process.env.URL': JSON.stringify(process.env.URL.toString())
+     })
     ]) 
     return config;
 }

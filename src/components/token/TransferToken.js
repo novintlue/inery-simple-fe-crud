@@ -1,8 +1,8 @@
 import React from 'react';
-import DeleteForm from './DeleteForm';
-import {Rpcs} from './Rpc'
+import DataForm from './TransferTokenForm';
+import {Rpcs} from '../Rpc'
 
-const DeleteData = () => {
+const Data = () => {
   const [Message, setMessage] = React.useState("");
   const handleOnSubmit = async (form) => {
     const api = Rpcs()
@@ -13,7 +13,7 @@ const DeleteData = () => {
           actions:[
               {
                 account: form.user,
-                name:"dbdestroy",
+                name:"transfer",
                 authorization:[
                       {
                           actor: form.user,
@@ -21,7 +21,7 @@ const DeleteData = () => {
                       }
                   ],
                   data:{
-                      id: form.id
+                    from: form.from, to: form.to, quantity: form.quantity, memo: form.memo
                   }
               }
           ]
@@ -37,13 +37,12 @@ const DeleteData = () => {
   };
 
   return (
-  <>
-    <React.Fragment>
-      <DeleteForm handleOnSubmit={handleOnSubmit} />
+    <><React.Fragment>
+      <DataForm handleOnSubmit={handleOnSubmit} />
     </React.Fragment><div className="main-form">
         {Message && <div> {Message} </div>}
       </div></>
   );
 };
 
-export default DeleteData;
+export default Data;

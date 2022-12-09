@@ -1,8 +1,8 @@
 import React from 'react';
-import UpdateForm from './UpdateForm';
-import {Rpcs} from './Rpc'
+import ReadForm from './ReadForm';
+import {Rpcs} from '../Rpc'
 
-const UpdateData = () => {
+const ReadData = () => {
   const [Message, setMessage] = React.useState("");
   const handleOnSubmit = async (form) => {
     const api = Rpcs()
@@ -13,7 +13,7 @@ const UpdateData = () => {
           actions:[
               {
                 account: form.user,
-                name:"dbupdate",
+                name:"dbread",
                 authorization:[
                       {
                           actor: form.user,
@@ -21,29 +21,27 @@ const UpdateData = () => {
                       }
                   ],
                   data:{
-                      id: form.id, user: form.user, data: form.data
+                      id: form.id
                   }
               }
           ]
       },{broadcast:true,sign:true})
   
-      console.log(tx) // output the tx to terminal, it's Json Object
-      console.log(tx.processed.action_traces[0].console)
       setMessage(tx.processed.action_traces[0].console)
   }catch(error){
-      console.log(error)
       setMessage(error.toString())
   }
-  };
+};
 
   return (
-  <>
+    <>
     <React.Fragment>
-      <UpdateForm handleOnSubmit={handleOnSubmit} />
-    </React.Fragment><div className="main-form">
-        {Message && <div> {Message} </div>}
-      </div></>
+      <ReadForm handleOnSubmit={handleOnSubmit} />
+    </React.Fragment>
+    <div className="main-form">
+    {Message && <div> {Message} </div>}
+  </div></>
   );
 };
 
-export default UpdateData;
+export default ReadData;
