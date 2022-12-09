@@ -6,7 +6,6 @@ const ReadData = () => {
   const [Message, setMessage] = React.useState("");
   const handleOnSubmit = async (form) => {
     const api = Rpcs()
-    console.log(form);
     try{
       // create new transaction and sign it
       const tx = await api.transact({
@@ -34,13 +33,15 @@ const ReadData = () => {
 };
 
   return (
-    <>
+  <>
     <React.Fragment>
       <ReadForm handleOnSubmit={handleOnSubmit} />
     </React.Fragment>
+    <br></br>
     <div className="main-form">
-    {Message && <div> {Message} </div>}
-  </div></>
+      {Message && <div> {Message} </div>}
+    </div>
+  </>
   );
 };
 

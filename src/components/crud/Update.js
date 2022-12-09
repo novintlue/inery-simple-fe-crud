@@ -6,7 +6,6 @@ const UpdateData = () => {
   const [Message, setMessage] = React.useState("");
   const handleOnSubmit = async (form) => {
     const api = Rpcs()
-    console.log(form);
     try{
       // create new transaction and sign it
       const tx = await api.transact({
@@ -37,9 +36,12 @@ const UpdateData = () => {
   <>
     <React.Fragment>
       <UpdateForm handleOnSubmit={handleOnSubmit} />
-    </React.Fragment><div className="main-form">
-        {Message && <div> {Message} </div>}
-      </div></>
+    </React.Fragment>
+    <br></br>
+    <div className="main-form">
+      {Message && <div> {Message} </div>}
+    </div>
+  </>
   );
 };
 
